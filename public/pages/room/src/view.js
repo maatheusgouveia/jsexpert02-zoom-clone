@@ -20,12 +20,22 @@ class View {
 		return video;
 	}
 
-	renderVideo({ userId, stream = null, url = null, isCurrentId = false }) {
-		const video = this.createVideoElement({ src: url, srcObject: stream });
-		this.appendToHTMLTree({ userId, video, isCurrentId });
+	renderVideo({
+		userId,
+		stream = null,
+		url = null,
+		isCurrentId = false,
+		muted = true,
+	}) {
+		const video = this.createVideoElement({
+			muted,
+			src: url,
+			srcObject: stream,
+		});
+		this.appendToHTMLTree(userId, video, isCurrentId);
 	}
 
-	appendToHTMLTree({ userId, video, isCurrentId }) {
+	appendToHTMLTree(userId, video, isCurrentId) {
 		const div = document.createElement('div');
 		div.id = userId;
 		div.classList.add('wrapper');
@@ -40,9 +50,7 @@ class View {
 
 	setParticipants(count) {
 		const myself = 1;
-
 		const participants = document.getElementById('participants');
-
 		participants.innerHTML = count + myself;
 	}
 }

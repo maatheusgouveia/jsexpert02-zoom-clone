@@ -47,27 +47,27 @@ class Business {
 
 	onUserConnected = function () {
 		return userId => {
-			console.log('user-connected!', userId);
+			console.log('user connected!', userId);
 			this.currentPeer.call(userId, this.currentStream);
 		};
 	};
 
 	onUserDisconnected = function () {
 		return userId => {
-			console.log('user-disconnected!', userId);
+			console.log('user disconnected!', userId);
 		};
 	};
 
 	onPeerError = function () {
 		return error => {
-			console.error('error on peer', error);
+			console.error('error on peer!', error);
 		};
 	};
 
 	onPeerConnectionOpened = function () {
 		return peer => {
 			const id = peer.id;
-			console.log('peer', peer);
+			console.log('peer!!', peer);
 			this.socket.emit('join-room', this.room, id);
 		};
 	};
@@ -84,6 +84,7 @@ class Business {
 			const callerId = call.peer;
 			this.addVideoStream(callerId, stream);
 			this.peers.set(callerId, { call });
+
 			this.view.setParticipants(this.peers.size);
 		};
 	};
